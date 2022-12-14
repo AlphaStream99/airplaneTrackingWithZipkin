@@ -4,7 +4,6 @@
 For the course "Special Topics - Cloud Computing from a Software Engineering Perspective", we would like to realize a project which is very similar to the following idea: "Microservice communication observed with OpenTelemetry & Jaeger". However, instead of using Jaeger, we would like to rely on Zipkin, instead. Zipkin is quite similar to Jaeger and is also very capable. In order to communicate with Zipkin, however, we would have to use a collection of tracing libraries. This would mean, we would probably not rely on OpenTelemetry. The project we would use consists of 3 Microservices and is provided by one of my team members, who would also redesign it in such a way that we would have 4 Microservices instead of three. The reason for that is that each of us should instrument the communication channel between two services.
 
 The project and Zipkin will be deployed on the cloud. We thought that we would have one container per two services + one container for the Zipkin server + one for Kafka, which makes four containers in total. 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- MILESTONES -->
 ## Milestone 1 - Set up the actual microservices locally 
@@ -30,7 +29,6 @@ The project and Zipkin will be deployed on the cloud. We thought that we would h
 * Set up the demo
 * Make the diagrams
 * Hopefully, pass and have a fun time while doing so!
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
 
 <!-- RESPONSIBILITIES -->
 ## Responsibilities - Who will do what?
@@ -43,4 +41,3 @@ And all of us together will share the load of using more advanced Zipkin feature
 
 We are also open to any suggestions and improvements you might have.
 
-<p align="right">(<a href="#readme-top">back to top</a>)</p>
