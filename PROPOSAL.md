@@ -41,3 +41,31 @@ And all of us together will share the load of using more advanced Zipkin feature
 
 We are also open to any suggestions and improvements you might have.
 
+## For the resubmission:
+### Why do we want to use Zipkin
+Zipkin came before Jaeger, and Jaeger was inspired by Zipkin and Dapper (tracing from google)
+#### Disadvantages compared to Jaeger: 
+-> Does not officially support OpenTelemetry but we would have to implement a mapping between Zipkin calls and OpenTelemetry (can be difficult)
+-> Because of the first point, it does not support as many languages as Jaeger
+#### Advantages compared to Jaeger: 
+-> Jaeger is a system which consists of many different units, while Zipkin ships its entire architecture including Collectors, Storage and UI and thus, works out of the box.
+-> Also, if a company decides to switch from Zipkin to Jaeger for whatever reason in the future, no problem at all - code must be only minimally adapted since Zipkin Traces are compatible with Jaeger (and its libraries).
+### Why put multiple services into the same container
+We were thinking of reducing the workload and grouping similar microservices together. However, since it’s a small project, we have decided to take your advice and put every microservice independently.
+        
+### Event-based?
+Yes, the architecture is event-based and we “make” the events by sending data from Postman and there is no real user interaction (because also at airports, we cannot really influence how the planes go, it’s mostly just seeing where they go from, how much the ticket costs, etc).
+
+### The architecture diagram
+![Architecture diagram](https://github.com/AlphaStream99/airplaneTrackingWithZipkin/blob/main/done.jpg)
+
+The idea is to send requests from Postman to the Airplane service which initially receives the data and then sends it to a corresponding topic in Kafka in the format of an Avro scheme we will also specify. FlightApproval service takes the messages in the previously mentioned topic and then does some calculations based on the distance of the airports, weather, etc. and feeds a new topic with its results. The CancelledFlight service will provide information about flights that have been cancelled or rescheduled. “To be seen” service we still have to think about a bit more but an idea we had was to do something similar to what RyanAir does - gives out very cheap flights for less popular destinations, especially off-season. Or, it could be a ControlTower service, aggregating the flights and saying when each of them can take off and land.
+
+
+### Provide a deployment architecture
+We would like to use Kubernetes, sorry for not mentioning it in the previous e-mail.
+The boxes represent nodes and most of the application will be stored in a 1 node 1 pod way, except Kafka and friend because we feel like they make a logical whole and should be kept in the same node.
+
+![Deployment diagram here](https://github.com/AlphaStream99/airplaneTrackingWithZipkin/blob/main/deployment3.jpg)
+
+
