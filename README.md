@@ -6,6 +6,7 @@
 * [Zipkin](#zipkin)
 * [Summary of Research](#summary-of-research)
 * [How to Run](#how-to-run)
+* [Submission 1 - Proposal](https://github.com/AlphaStream99/airplaneTrackingWithZipkin/blob/main/PROPOSAL.md)
 
 ---
 #### About the project
