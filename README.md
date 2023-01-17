@@ -1,9 +1,12 @@
 # Clound Computing from a Software Engineering Perspective
-## Airplane Tracing with Zipkins
+## Airplane Tracking with Zipkins
 
 ### Contents
 * [About the Project](#about-the-project)
 * [Zipkin](#zipkin)
+   * [What do we need to run the Zipkin Server?](#what-do-we-need-to-run-the-zipkin-server)
+   * [How to include Zipkin to the project under observation?](#how-to-include-zipkin-to-the-project-under-observation)
+   * [How we use Zipkin in our project](#how-we-use-zipkin-in-our-project)
 * [Summary of Research](#summary-of-research)
 * [How to Run](#how-to-run)
 * [References](#references)
