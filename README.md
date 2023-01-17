@@ -25,7 +25,7 @@ We are mostly using Zipkin because of multiple reasons (using Benno’s Bachelor
 #### What do we need to run the Zipkin Server? 
 Basically, running the Zipkin server is easy, as the deployment comes in one single, ready2use docker container. For that, you just need to execute “docker pull openzipkin/zipkin” and then “docker run -d -p 9411:9411 openzipkin/zipkin”. Once that is done and the container is running, you can connect to the port 9411 of the machine it is running on, and you should see the query page of Zipkin. It should look like this:
 
-![Zipkin Home](https://github.com/AlphaStream99/airplaneTrackingWithZipkin/blob/main/zipkin-home.png)
+![Zipkin Home](https://github.com/AlphaStream99/airplaneTrackingWithZipkin/blob/main/images/zipkin-home.png)
  
 #### How to include Zipkin to the project under observation?
 Unfortunately, and this is a real drawback of Zipkin, the documentation consists of a single readme, which can be found here: [ZipkinDocumentation](https://hub.docker.com/r/openzipkin/zipkin). Therefore, it is difficult to find all the dependencies when doing it for the first time. Naturally, it was easier now because we already knew which ones to use and where to find them. Basically, we have added the following dependencies to the build.gradle file:
@@ -42,7 +42,7 @@ Once this is done, we import following Classes in general:
 
 Furthermore, we have implemented a minimal demo project to realize communication with Zipkin:
 
-![Zipkin Sample App](https://github.com/AlphaStream99/airplaneTrackingWithZipkin/blob/main/zipkin-sample-app.png)
+![Zipkin Sample App](https://github.com/AlphaStream99/airplaneTrackingWithZipkin/blob/main/images/zipkin-sample-app.png)
 
 
 In the image above we can see that in the main method, we create and send two spans. Even though we could add it as boiler-plate code, like in the first part, there is also a way to package everything neatly in a function, since normally, the procedure is always the same. It is very important to report the spans to Zipkin via AsyncReporter.   

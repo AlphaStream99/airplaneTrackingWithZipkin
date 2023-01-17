@@ -57,7 +57,7 @@ We were thinking of reducing the workload and grouping similar microservices tog
 Yes, the architecture is event-based and we “make” the events by sending data from Postman and there is no real user interaction (because also at airports, we cannot really influence how the planes go, it’s mostly just seeing where they go from, how much the ticket costs, etc).
 
 ### The architecture diagram
-![Architecture diagram](https://github.com/AlphaStream99/airplaneTrackingWithZipkin/blob/main/done.jpg)
+![Architecture diagram](https://github.com/AlphaStream99/airplaneTrackingWithZipkin/blob/main/images/proposed-arch-diagram.jpg)
 
 The idea is to send requests from Postman to the Airplane service which initially receives the data and then sends it to a corresponding topic in Kafka in the format of an Avro scheme we will also specify. FlightApproval service takes the messages in the previously mentioned topic and then does some calculations based on the distance of the airports, weather, etc. and feeds a new topic with its results. The CancelledFlight service will provide information about flights that have been cancelled or rescheduled. “To be seen” service we still have to think about a bit more but an idea we had was to do something similar to what RyanAir does - gives out very cheap flights for less popular destinations, especially off-season. Or, it could be a ControlTower service, aggregating the flights and saying when each of them can take off and land.
 
@@ -66,6 +66,6 @@ The idea is to send requests from Postman to the Airplane service which initiall
 We would like to use Kubernetes, sorry for not mentioning it in the previous e-mail.
 The boxes represent nodes and most of the application will be stored in a 1 node 1 pod way, except Kafka and friend because we feel like they make a logical whole and should be kept in the same node.
 
-![Deployment diagram here](https://github.com/AlphaStream99/airplaneTrackingWithZipkin/blob/main/deployment3.jpg)
+![Deployment diagram here](https://github.com/AlphaStream99/airplaneTrackingWithZipkin/blob/main/images/proposed-deployment-diagram.jpg)
 
 
