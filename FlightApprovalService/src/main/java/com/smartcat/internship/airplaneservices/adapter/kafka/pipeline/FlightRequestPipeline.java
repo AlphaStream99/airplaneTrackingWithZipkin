@@ -50,12 +50,17 @@ public class FlightRequestPipeline {
                 long parentId = request.getParentId();
                 long startTimestampInMillisec = request.getStartTimestamp();
                 String serviceName = request.getServiceName();
+                System.out.println("traceId in FA: "+traceId);
+                System.out.println("parentId in FA: "+parentId);
+                System.out.println("startTimestamp in FA: "+startTimestampInMillisec);
+                System.out.println("serviceName in FA: "+serviceName);
                 Span receiveSpan = ApplicationRunner.createSpan(
                         traceId,
                         parentId,
                         startTimestampInMillisec,
                         serviceName
                 );
+                System.out.println("span to string: "+receiveSpan.toString());
                 ApplicationRunner.sendToZipkin(receiveSpan);
 
                 Event event = new Event(

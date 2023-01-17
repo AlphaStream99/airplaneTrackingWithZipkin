@@ -28,19 +28,28 @@ public class ApplicationRunner {
     }
 
     public static Span createSpan(String traceId, Long parentSpanId, long startTimeInMillisec, String serviceName) {
-        return Span.newBuilder()
+        Span.Builder builder = Span.newBuilder()
                 .traceId(traceId)
                 .id((parentSpanId == -1 ? 1 : parentSpanId + 1))
-                .parentId(parentSpanId)
+                .kind(Span.Kind.CLIENT)
+                //.parentId(parentSpanId)
                 .timestamp(startTimeInMillisec)
                 .remoteEndpoint(Endpoint.newBuilder().serviceName(serviceName).build())
-                .duration((System.currentTimeMillis() * 1000) - startTimeInMillisec)
-                .build();
+                .duration((System.currentTimeMillis() * 1000) - startTimeInMillisec);
+        if (parentSpanId == -1) {
+            builder.parentId(null);
+        }
+        else {
+            builder.parentId(parentSpanId);
+        }
+        return builder.build();
     }
 
     public static void sendToZipkin(Span span) {
         rep.report(span);
+        System.out.println("reporting was ok: "+rep.check().ok());
         rep.flush();
+        System.out.println("sending was ok: "+rep.check().ok());
     }
 
     public void run() {

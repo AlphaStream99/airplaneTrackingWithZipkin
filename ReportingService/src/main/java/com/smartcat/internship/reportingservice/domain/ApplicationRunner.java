@@ -28,15 +28,22 @@ public class ApplicationRunner {
         Executors.newSingleThreadExecutor().submit(this::run);
     }
 
-    public static Span createSpan(String traceId, String parentSpanId, long startTimeInMillisec, String serviceName) {
-        return Span.newBuilder()
+    public static Span createSpan(String traceId, Long parentSpanId, long startTimeInMillisec, String serviceName) {
+        Span.Builder builder = Span.newBuilder()
                 .traceId(traceId)
-                .id((parentSpanId == null ? "1" : parentSpanId + "1"))
-                .parentId(parentSpanId)
+                .id((parentSpanId == -1 ? 1 : parentSpanId + 1))
+                .kind(Span.Kind.CLIENT)
+                //.parentId(parentSpanId)
                 .timestamp(startTimeInMillisec)
                 .remoteEndpoint(Endpoint.newBuilder().serviceName(serviceName).build())
-                .duration((System.currentTimeMillis() * 1000) - startTimeInMillisec)
-                .build();
+                .duration((System.currentTimeMillis() * 1000) - startTimeInMillisec);
+        if (parentSpanId == -1) {
+            builder.parentId(null);
+        }
+        else {
+            builder.parentId(parentSpanId);
+        }
+        return builder.build();
     }
 
     public static void sendToZipkin(Span span) {
