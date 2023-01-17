@@ -10,6 +10,6 @@ COPY . /app/AirplaneService
 RUN cd /app/AirplaneService && gradle build
 
 EXPOSE 8099
-ADD build/libs/AirplaneServices-0.0.1-SNAPSHOT.jar /app/airplane-service.jar
+ADD build/libs/AirplaneService-0.0.1-SNAPSHOT.jar /app/airplane-service.jar
 ENTRYPOINT ["java"]
 CMD ["-jar", "app/airplane-service.jar"]
