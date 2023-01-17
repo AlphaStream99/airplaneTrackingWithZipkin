@@ -15,7 +15,7 @@ plugins {
     id 'org.springframework.boot' version '2.4.0'
     id 'io.spring.dependency-management' version '1.0.10.RELEASE'
     id 'java'
-    id 'com.commercehub.gradle.plugin.avro' version '0.21.0'
+    id 'com.commercehub.gradle.plugin.avro' version '0.9.1'
     id 'com.github.imflog.kafka-schema-registry-gradle-plugin' version '1.1.0'
 
 }
