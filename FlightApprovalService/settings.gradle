@@ -1,0 +1,15 @@
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        jcenter()
+        maven {
+            url 'http://packages.confluent.io/maven/'
+        }
+        maven {
+            url "https://dl.bintray.com/gradle/gradle-plugins"
+        }
+    }
+}
+
+rootProject.name = 'FlightApprovalService'
+

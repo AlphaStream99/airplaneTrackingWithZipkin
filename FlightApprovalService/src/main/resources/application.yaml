@@ -1,0 +1,32 @@
+kafka:
+  consumer:
+    flight-request:
+      topics:
+        - flight-request-topic
+      properties:
+        group.id: flight-approval-service-group
+        bootstrap.servers: localhost:9092
+        session.timeout.ms: 30000
+        key.deserializer: org.apache.kafka.common.serialization.StringDeserializer
+        schema.registry.url: http://localhost:8081
+        auto.offset.reset: earliest # Change it to latest at the end
+        enable.partition.eof: false
+        enable.auto.commit: false
+  channel-mapping:
+    flightRequest: flight-request-topic
+    flightResponse: flight-response-topic
+  producer:
+    flight-response:
+      properties:
+        bootstrap.servers: localhost:9092
+        schema.registry.url: http://localhost:8081
+        acks: all
+        transactional.id: dun
+        retries: 1
+        batch.size: 16384
+        linger.ms: 1
+        buffer.memory: 33554432
+        key.serializer: org.apache.kafka.common.serialization.StringSerializer
+        enable.idempotence: true
+server:
+  port : 8090
