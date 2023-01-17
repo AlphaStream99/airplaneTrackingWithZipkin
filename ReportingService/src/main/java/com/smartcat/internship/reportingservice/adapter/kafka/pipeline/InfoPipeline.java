@@ -44,10 +44,10 @@ public class InfoPipeline {
         for (ConsumerRecord<String, Object> record : records) {
             if (record.value() instanceof FlightResponse) {
                 FlightResponse request = (FlightResponse) record.value();
-                String traceId = String.valueOf(request.get("traceId"));
-                Long parentId = (Long) request.get("parentId");
-                long startTimestampInMillisec = Long.parseLong(String.valueOf(request.get("startTimestamp")));
-                String serviceName = String.valueOf(request.get("serviceName"));
+                String traceId = request.getTraceId();
+                Long parentId = request.getParentId();
+                long startTimestampInMillisec = request.getStartTimestamp();
+                String serviceName = request.getServiceName();
                 Span receiveSpan = ApplicationRunner.createSpan(
                         traceId,
                         parentId,
