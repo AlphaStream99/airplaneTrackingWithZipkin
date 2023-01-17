@@ -71,6 +71,18 @@ Each bar that we see in Zipkin means the time it spent on the wire and the queue
 ### Summary of Research
 
 ### How to Run
+(to be fixed)
+
+* basic libraries to be installed before running
+   * docker
+   * kubernetes 
+   * java 11 (or is it 8?)
+   * gradle 6.6.1
+   * openzipkin/zipkin
+* Steps to run:
+   * Clone the repo 
+   * go to every service and build the image (--we can even have a bash script to do this) 
+   * to be added when we actually run all this 😂
 
 ### References
 [1] Benno Pereszteghy's "Integration von Funktionstracing in OPC-UA"  
