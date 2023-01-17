@@ -3,6 +3,8 @@
 
 ### Contents
 * [About the Project](#about-the-project)
+    * [Architecture of the System](#architecture-of-the-system)
+    * [Deployment Plan](#deployment-plan)
 * [Zipkin](#zipkin)
    * [What do we need to run the Zipkin Server?](#what-do-we-need-to-run-the-zipkin-server)
    * [How to include Zipkin to the project under observation?](#how-to-include-zipkin-to-the-project-under-observation)
@@ -14,6 +16,15 @@
 
 ---
 ### About the project
+We will add something here
+
+#### Architecture of the System
+Insert the image which Benno edited here and explain a bit
+
+#### Deployment Plan
+We would be using Kubernetes to deploy the differnet microservices and helper-services like Kafka, Zookeeper, etc. In the diagram below, the box represents nodes and all the microservices will be in a 1 node 1 pod way including Zipkin. Whereas, Kafka, Zookeeper & Schema Registry would make a logical whole and would be kept together in 1 node.
+
+![Deployment Diagram](https://github.com/AlphaStream99/airplaneTrackingWithZipkin/blob/main/images/deplyment-diagram.png)
 
 ### Zipkin
 Zipkin is a distributed tracing system. Its task is to collect `spans`, which are created and sent by the instrumented services. By adding the necessary information to these spans inside the services, we can fulfill use cases ranging from *"What services will a message be sent to? Is the communication flow correct?"*, up to *"How long do the observed operations take? Which methods inside the service require the longest? Where are exactly our bottlenecks?"*
