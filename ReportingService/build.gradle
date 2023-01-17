@@ -1,0 +1,89 @@
+buildscript {
+    repositories {
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+        maven {
+            url "http://packages.confluent.io/maven/"
+        }
+        maven {
+            url = uri("https://jitpack.io")
+        }
+    }
+}
+plugins {
+    id 'org.springframework.boot' version '2.4.0'
+    id 'io.spring.dependency-management' version '1.0.10.RELEASE'
+    id 'java'
+    id 'com.commercehub.gradle.plugin.avro' version '0.9.1'
+    id 'com.github.imflog.kafka-schema-registry-gradle-plugin' version '1.1.0'
+
+}
+apply plugin: 'java'
+apply plugin: 'io.spring.dependency-management'
+group = 'avro.schemas'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '8'
+def relativeAvroSchemasLocation = "/${projectDir}/src/main/avro"
+repositories {
+    mavenCentral()
+    maven {
+        url 'http://packages.confluent.io/maven/'
+    }
+    maven {
+        url "https://plugins.gradle.org/m2/"
+    }
+    maven {
+        url = uri("https://jitpack.io")
+    }
+}
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
+
+    implementation('org.springframework.boot:spring-boot-starter-web')
+    compile group: 'org.springframework.plugin', name: 'spring-plugin-core', version: '2.0.0.RELEASE'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    compile group: 'org.springframework', name: 'spring-context', version: '5.3.2'
+
+    compile('org.apache.kafka:kafka-clients:2.5.0')
+
+    implementation 'io.confluent:kafka-avro-serializer:6.0.0'
+    implementation('org.apache.avro:avro:1.10.1')
+
+    compile group: 'com.datastax.oss', name: 'java-driver-core', version: '4.9.0'
+
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.11.2'
+    compile "io.zipkin.zipkin2:zipkin:2.21.6"
+    compile "io.zipkin.reporter2:zipkin-sender-urlconnection:2.16.3"
+    compile "io.zipkin.reporter2:zipkin-reporter:2.15.0"
+    compile "io.zipkin.brave:brave:5.12.4"
+
+}
+
+jar {
+    //group    = "com.smartcat.internship.reportingservice"
+    //version  = "0.0.1-SNAPSHOT"
+    //manifest { attributes "Main-Class": "com.smartcat.internship.airplaneservices.ReportingServiceApplication" }
+}
+
+test {
+    useJUnitPlatform()
+}
+
+def generateAvro = tasks.register("generateAvro", com.commercehub.gradle.plugin.avro.GenerateAvroJavaTask) {
+    source("src/main/avro")
+    outputDir = file("src/main/java/")
+}
+schemaRegistry {
+    url = 'http://localhost:8081'
+    download {
+        // extension of the output file depends on the the schema type
+        subject('avro.schemas.v1.Coordinates', relativeAvroSchemasLocation)
+        subject('avro.schemas.v1.FlightRequest', relativeAvroSchemasLocation)
+        subject('avro.schemas.v1.FlightResponse', relativeAvroSchemasLocation)
+        subject('avro.schemas.v1.FlightStatus', relativeAvroSchemasLocation)
+    }
+}
+
+generateAvroJava.enabled = false

@@ -1,0 +1,18 @@
+kafka:
+  consumer:
+    report:
+      topics:
+        - flight-response-topic
+      properties:
+        group.id: reporting-service-group
+        bootstrap.servers: localhost:9092
+        session.timeout.ms: 30000
+        key.deserializer: org.apache.kafka.common.serialization.StringDeserializer
+        schema.registry.url: http://localhost:8081
+        auto.offset.reset: earliest
+        enable.partition.eof: false
+        enable.auto.commit: false
+  channel-mapping:
+    flightResponse: flight-response-topic
+server:
+  port : 8097
