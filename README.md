@@ -179,6 +179,9 @@ Start of the microservice called "Airplane Service":
 Sending of the first message accompanied with the first trace:
 ![First Message](https://github.com/AlphaStream99/airplaneTrackingWithZipkin/blob/main/images/operation/sending_first_request.png)
 
+One can see the message in the Kafka Topic:
+![First Message](https://github.com/AlphaStream99/airplaneTrackingWithZipkin/blob/main/images/operation/topic.png)
+
 Searching for a trace, Zipkin presented us:
 ![First Trace](https://github.com/AlphaStream99/airplaneTrackingWithZipkin/blob/main/images/operation/zipkin_1.png)
 
