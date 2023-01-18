@@ -139,6 +139,18 @@ In this course, while implementing the project we learnt the following things:
    * `kubectl port-forward deployment/schema-registry 8081:8081`
    * `kubectl port-forward deployment/kafka 9092:9092`
    * `kubectl port-forward deployment/zookeeper 2181:2181`
+* Now that the things are running we need to run a few scripts manually:
+   * `chmod u+x scripts/create-topic.sh`
+   * `chmod u+x scripts/kafka_2.13-2.6.0/bin/*`
+   * Run `kubectl get pods` and check the pod-name for kafka
+   * `kubectl exec -it --namespace kafka <pod-name-from-previous-command> bash
+   * `cd scripts/kafka_2.13-2.6.0/bin`
+   * `../../../create-topic.sh`
+   * `exit`
+* Sample cURL: 
+```bash
+curl to be added here
+```
 
 ### References
 [1] Benno Pereszteghy's "Integration von Funktionstracing in OPC-UA"  *(For more details, please contat the author at benno99@gmx.at)*  
