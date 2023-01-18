@@ -10,6 +10,7 @@
    * [How to include Zipkin to the project under observation?](#how-to-include-zipkin-to-the-project-under-observation)
    * [How we use Zipkin in our project](#how-we-use-zipkin-in-our-project)
 * [Summary of Research](#summary-of-research)
+* [Summary of Lessons Learnt](#summary-of-lessons-learnt)
 * [How to Run](#how-to-run)
 * [References](#references)
 * [Submission 1 - Proposal](https://github.com/AlphaStream99/airplaneTrackingWithZipkin/blob/main/PROPOSAL.md)
@@ -70,6 +71,13 @@ Each bar that we see in Zipkin means the time it spent on the wire and the queue
 
 ### Summary of Research
 
+### Summary of Lessons Learnt
+In this course, while implementing the project we learnt the following things:
+* How to create and devleop microservices
+* Basics of Docker (creating images, running said images in containers and using repositories like [Docker Hub](https://hub.docker.com/))
+* How to run microservice architecture with Docker on local system as well as via Kubernetes
+* Implementing tracing via Zipkin
+
 ### How to Run
 (to be fixed)
 
@@ -85,7 +93,7 @@ Each bar that we see in Zipkin means the time it spent on the wire and the queue
    * to be added when we actually run all this 😂
 
 ### References
-[1] Benno Pereszteghy's "Integration von Funktionstracing in OPC-UA"  
+[1] Benno Pereszteghy's "Integration von Funktionstracing in OPC-UA"  *(For more details, please contat the author at benno99@gmx.at)*  
 [2] [Zipkin vs. Jaeger: What Is the Difference?](https://lumigo.io/what-is-distributed-tracing/zipkin-vs-jaeger-what-is-the-difference/) (last accessed 17.01.2023)
 
 ---
