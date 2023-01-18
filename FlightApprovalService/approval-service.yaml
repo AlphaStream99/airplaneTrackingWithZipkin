@@ -1,0 +1,57 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: airplane-service
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: approval-service
+  labels:
+    app: approval-service
+spec:
+  ports:
+  - port: 80
+    protocol: TCP
+    targetPort: 8090
+  selector:
+    app: approval-service
+  type: ClusterIP
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: approval-service
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: approvalservice
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  template:
+    metadata:
+      labels:
+        app: approvalservice
+    spec:
+      containers:
+      - name: airplane-service
+        image: alphastream99/airplane-service
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8090
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 8090
+          initialDelaySeconds: 5
+        lifecycle:
+          preStop:
+            exec:
+              command: ["sleep", "15"]
