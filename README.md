@@ -104,6 +104,6 @@ In this course, while implementing the project we learnt the following things:
 
 ---
 ### Group Members
-* Benno Pereszteghy ()
-* Dunja Zivotin ()
+* Benno Pereszteghy (K11771353)
+* Dunja Zivotin (K11932162)
 * Prankur Agarwal (K12102893)
