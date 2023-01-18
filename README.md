@@ -88,7 +88,7 @@ In this course, while implementing the project we learnt the following things:
 * Basic libraries to be installed before running:
    * docker
    * kubernetes 
-   * java 11 (or is it 8?)
+   * java 11
    * gradle 6.6.1
    * openzipkin/zipkin
 * Creating Docker Images
