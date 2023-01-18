@@ -1,0 +1,8 @@
+{
+    "type": "enum",
+    "namespace": "avro.schemas.v1",
+    "name": "FlightStatus",
+    "symbols": [ "APPROVED", "REJECTED"]
+}
+
+

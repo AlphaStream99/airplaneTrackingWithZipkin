@@ -1,0 +1,33 @@
+{
+    "type": "record",
+    "namespace": "avro.schemas.v1",
+    "name": "FlightResponse",
+    "fields": [
+        {
+            "name": "flightCode",
+            "type": {
+                    "type": "string",
+                    "avro.java.string": "String"
+            }
+        },
+        {
+            "name": "distance",
+            "type": "float"
+        },
+        {
+            "name": "flightTime",
+            "type": "int"
+        },
+        {
+            "name": "flightStatus",
+            "type": ["avro.schemas.v1.FlightStatus", "null"]
+        },
+        {
+            "name": "uuid",
+            "type": {
+                "type": "string",
+                "avro.java.string": "String"
+            }
+        }
+    ]
+}

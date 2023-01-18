@@ -22,12 +22,13 @@ spec:
         image: alphastream99/reporting-service:reportingservice
         imagePullPolicy: Always
         ports:
-        - containerPort: 8090
+        - containerPort: 8097
         readinessProbe:
           httpGet:
             path: /
-            port: 8090
-          initialDelaySeconds: 5
+            port: 8097
+          initialDelaySeconds: 30
+          failureThreshold: 120
         lifecycle:
           preStop:
             exec:

@@ -1,0 +1,8 @@
+{"type":"record",
+"name":"FlightCollision",
+"namespace":"avro.schemas.v1",
+"fields":[
+    {"name":"flightCode1","type":{"type":"string","avro.java.string":"String"}},
+    {"name":"flightCode2","type":{"type":"string","avro.java.string":"String"}},
+    {"name":"height","type":"double"}
+]}

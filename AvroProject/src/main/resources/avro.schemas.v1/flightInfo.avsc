@@ -1,0 +1,12 @@
+{"type":"record",
+"name":"FlightInfo",
+"namespace":"avro.schemas.v1",
+"fields":[
+    { "name": "flightCode", "type": {
+        "type": "string",
+        "avro.java.string": "String"
+    } },
+    {"name":"currentCoordinates","type":["Coordinates","null"]},
+    {"name":"height","type":"float"},
+    {"name":"speed","type":"float"}
+]}

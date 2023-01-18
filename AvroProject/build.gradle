@@ -1,0 +1,67 @@
+buildscript {
+    repositories {
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+        maven {
+            url "http://packages.confluent.io/maven/"
+        }
+        maven {
+            url = uri("https://jitpack.io")
+        }
+    }
+    dependencies {
+        classpath "com.github.imflog:kafka-schema-registry-gradle-plugin:1.1.0"
+    }
+
+}
+
+plugins {
+    id 'java'
+}
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+
+    maven {
+        url "https://plugins.gradle.org/m2/"
+    }
+    maven {
+        url "http://packages.confluent.io/maven/"
+    }
+    maven {
+        url = uri("https://jitpack.io")
+    }
+
+}
+
+dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.6.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
+    implementation'io.confluent:kafka-avro-serializer:6.0.0'
+
+}
+
+test {
+    useJUnitPlatform()
+}
+
+apply plugin: "com.github.imflog.kafka-schema-registry-gradle-plugin"
+
+def pathToSchemas = "${projectDir}/src/main/resources/avro.schemas.v1"
+
+schemaRegistry {
+    url = 'http://localhost:8081'
+    register {
+        subject('avro.schemas.v1.Coordinates', "${pathToSchemas}/coordinates.avsc", "AVRO")
+        subject('avro.schemas.v1.FlightRequest', "${pathToSchemas}/flightRequest.avsc", "AVRO").addReference('avro.schemas.v1.Coordinates', 'avro.schemas.v1.Coordinates', 1)
+        subject('avro.schemas.v1.FlightStatus', "${pathToSchemas}/flightStatus.avsc", "AVRO")
+        subject('avro.schemas.v1.FlightResponse', "${pathToSchemas}/flightResponse.avsc", "AVRO").addReference('avro.schemas.v1.FlightStatus', 'avro.schemas.v1.FlightStatus', 1)
+        //subject('avro.schemas.v1.FlightInfo', "${pathToSchemas}/flightInfo.avsc", "AVRO").addReference('avro.schemas.v1.Coordinates', 'avro.schemas.v1.Coordinates', 1)
+        //subject('avro.schemas.v1.FlightCollision', "${pathToSchemas}/flightCollision.avsc", "AVRO")
+    }
+}
+
