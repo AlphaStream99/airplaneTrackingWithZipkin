@@ -17,6 +17,7 @@
 
 ---
 ### About the project
+This project is about integrating Zipkin trace generation in our system. The system is basically a microservice based architure with services namely - *Airplane Servcie, Flight Approval Service & Reporting Service* which together helps in ________________.
 We will add something here
 
 #### Architecture of the System
@@ -70,6 +71,7 @@ We are creating spans the moment before sending the messages to kafka. The reaso
 Each bar that we see in Zipkin means the time it spent on the wire and the queue (plus in the low-level code of send/receive). The blank spaces between the blocks mean how much time it has spent in a service, which is not our focus right now.  
 
 ### Summary of Research
+We have successfully integrated Zipkin tracing into our microservices. More details about the same have already been discussed in the above sections. Talking about the resuts/conclusions from the trace generated, we can say that Kafka seems to have performance issues for our use case and hence as a further improvement, we can switch to other message brokers like AWS SQS, OPCUA, etc. 
 
 ### Summary of Lessons Learnt
 In this course, while implementing the project we learnt the following things:
