@@ -132,6 +132,13 @@ In this course, while implementing the project we learnt the following things:
    * `kubectl apply -f kafka-zookeeper-schema-registry/zookeeper-service.yaml`
    * `kubectl apply -f kafka-zookeeper-schema-registry/zookeeper-deployment.yaml`
    * `cd ..`
+   * `kubectl port-forward deployment/airplane-service 8099:8099`
+   * `kubectl port-forward deployment/flight-approval-service 8090:8090`
+   * `kubectl port-forward deployment/reporting-service 8097:8097`
+   * `kubectl port-forward deployment/zipkin 9411:9411`
+   * `kubectl port-forward deployment/schema-registry 8081:8081`
+   * `kubectl port-forward deployment/kafka 9092:9092`
+   * `kubectl port-forward deployment/zookeeper 2181:2181`
 
 ### References
 [1] Benno Pereszteghy's "Integration von Funktionstracing in OPC-UA"  *(For more details, please contat the author at benno99@gmx.at)*  
