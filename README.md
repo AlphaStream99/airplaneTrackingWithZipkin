@@ -85,18 +85,53 @@ In this course, while implementing the project we learnt the following things:
 * Implementing tracing via Zipkin
 
 ### How to Run
-(to be fixed)
-
-* basic libraries to be installed before running
+* Basic libraries to be installed before running:
    * docker
    * kubernetes 
    * java 11 (or is it 8?)
    * gradle 6.6.1
    * openzipkin/zipkin
-* Steps to run:
-   * Clone the repo 
-   * go to every service and build the image (--we can even have a bash script to do this) 
-   * to be added when we actually run all this 😂
+* Creating Docker Images
+   * `cd AirplaneService`
+   * `gradle build .`
+   * `docker build -t airplane-service .`
+   * `docker tag airplane-service:latest airplane-service:airplaneservice`
+   * `docker tag airplane-service:airplaneservice alphastream99/airplane-service:airplaneservice`
+   * `docker push alphastream99/airplane-service:airplaneservice`
+   * `cd ../FlightApprovalService`
+   * `gradle build .`
+   * `docker build -t approval-service .`
+   * `docker tag approval-service:latest approval-service:approvalservice`
+   * `docker tag approval-service:approvalservice alphastream99/approval-service:approvalservice`
+   * `docker push alphastream99/approval-service:approvalservice`
+   * `cd ../ReportingService`
+   * `gradle build .`
+   * `docker build -t reporting-service .`
+   * `docker tag reporting-service:latest reporting-service:reportingservice`
+   * `docker tag reporting-service:reportingservice alphastream99/reporting-service:reportingservice`
+   * `docker push alphastream99/reporting-service:reportingservice`
+   * `cd ..`
+* Running Kubernetes:
+   * `cd k8_yamls`
+   * `kubectl apply -f airplane-service/namespace.yaml`
+   * `kubectl apply -f airplane-service/service.yaml`
+   * `kubectl apply -f airplane-service/deployment.yaml`
+   * `kubectl apply -f flight-approval-service/namespace.yaml`
+   * `kubectl apply -f flight-approval-service/service.yaml`
+   * `kubectl apply -f flight-approval-service/deployment.yaml`
+   * `kubectl apply -f reporting-service/namespace.yaml`
+   * `kubectl apply -f reporting-service/service.yaml`
+   * `kubectl apply -f reporting-service/deployment.yaml`
+   * `kubectl apply -f zipkin/namespace.yaml`
+   * `kubectl apply -f zipkin/service.yaml`
+   * `kubectl apply -f zipkin/deployment.yaml`
+   * `kubectl apply -f kafka-zookeeper-schema-registry/schema-registry-service.yaml`
+   * `kubectl apply -f kafka-zookeeper-schema-registry/schema-registry-deployment.yaml`
+   * `kubectl apply -f kafka-zookeeper-schema-registry/kafka-service.yaml`
+   * `kubectl apply -f kafka-zookeeper-schema-registry/kafka-deployment.yaml`
+   * `kubectl apply -f kafka-zookeeper-schema-registry/zookeeper-service.yaml`
+   * `kubectl apply -f kafka-zookeeper-schema-registry/zookeeper-deployment.yaml`
+   * `cd ..`
 
 ### References
 [1] Benno Pereszteghy's "Integration von Funktionstracing in OPC-UA"  *(For more details, please contat the author at benno99@gmx.at)*  
