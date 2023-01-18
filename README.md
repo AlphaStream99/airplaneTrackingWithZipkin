@@ -11,7 +11,8 @@
    * [How we use Zipkin in our project](#how-we-use-zipkin-in-our-project)
 * [Summary of Research](#summary-of-research)
 * [Summary of Lessons Learnt](#summary-of-lessons-learnt)
-* [How to Run](#how-to-run)
+* [How to Run - Local](#how-to-run---local)
+* [How to Run - Kubernetes](#how-to-run---kubernetes)
 * [What we were able to get running](#what-we-were-able-to-get-running)
 * [References](#references)
 * [Submission 1 - Proposal](https://github.com/AlphaStream99/airplaneTrackingWithZipkin/blob/main/PROPOSAL.md)
@@ -29,7 +30,7 @@ We were actually interested in what kind of performance Kafka has as a message b
 ![Architecture Diagram](https://github.com/AlphaStream99/airplaneTrackingWithZipkin/blob/main/images/architecture_diagram.png)
 
 #### Deployment Plan
-We would be using Kubernetes to deploy the differnet microservices and helper-services like Kafka, Zookeeper, etc. In the diagram below, the box represents nodes and all the microservices will be in a 1 node 1 pod way including Zipkin. Whereas, Kafka, Zookeeper & Schema Registry would make a logical whole and would be kept together in 1 node.
+We would run the setup on local machine as well as for learning per se try out Kubernetes as well. In Kubernetes we deploy the differnet microservices and helper-services like Kafka, Zookeeper, etc. In the diagram below, the box represents nodes and all the microservices will be in a 1 node 1 pod way including Zipkin. Whereas, Kafka, Zookeeper & Schema Registry would make a logical whole and would be kept together in 1 node.
 
 ![Deployment Diagram](https://github.com/AlphaStream99/airplaneTrackingWithZipkin/blob/main/images/deplyment-diagram.png)
 
@@ -87,7 +88,53 @@ In this course, while implementing the project we learnt the following things:
 * How to run microservice architecture with Docker on local system as well as via Kubernetes
 * Implementing tracing via Zipkin
 
-### How to Run
+### How to Run - Local
+* Basic libraries to be installed before running:
+   * java 11
+   * gradle 6.6.1
+   * openzipkin/zipkin
+* Run the following:
+   * `cd AirplaneService`
+   * `gradle build .`
+   * `java -jar <path-to-jar>`
+   * On a new terminal: `cd FlightApprovalService`
+   * `gradle build .`
+   * `java -jar <path-to-jar>`
+   * On a new terminal: `cd ReportingService`
+   * `gradle build .`
+   * `java -jar <path-to-jar>`
+   * On a new terminal: `docker compose up -d 
+   * Open terminal window and go to the repository 
+   * `chmod u+x scripts/create-topic.sh`
+   * `chmod u+x scripts/kafka_2.13-2.6.0/bin/*`
+   * `cd scripts/kafka_2.13-2.6.0/bin`
+   * `../../../create-topic.sh`
+   * On a new terminal: `cd AvroProject`
+   * `gradle build .`
+   * `docker pull openzipkin/zipkin`
+   * `docker run -d -p 9411:9411 openzipkin/zipkin`
+* Send the request via Postman. Sample cURL:
+```bash
+curl --location --request POST 'http://localhost:8099/airplane-service/flight-request/testDe' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+   "flightCode":"DEL-123",
+   "fromCoordinates":{
+      "lat":30,
+      "lon":26
+   },
+   "toCoordinates":{
+      "lat":22,
+      "lon":-11
+   },
+   "uuid":"",
+   "traceId": "idd",
+   "parentId": -1,
+   "startTimestamp": 0,
+   "serviceName": "serviceName"
+}'
+```
+### How to Run - Kubernetes
 * Basic libraries to be installed before running:
    * docker
    * kubernetes 
@@ -145,7 +192,7 @@ In this course, while implementing the project we learnt the following things:
    * `cd scripts/kafka_2.13-2.6.0/bin`
    * `../../../create-topic.sh`
    * `exit`
-* Sample cURL: 
+* Send the request via Postman. Sample cURL:
 ```bash
 curl --location --request POST 'http://localhost:8099/airplane-service/flight-request/testDe' \
 --header 'Content-Type: application/json' \
@@ -166,6 +213,7 @@ curl --location --request POST 'http://localhost:8099/airplane-service/flight-re
    "serviceName": "serviceName"
 }'
 ```
+
 ### What we were able to get running
 We tried really hard to deploy things via Kubernetes. However, we were not able to get the pods running as we wished. However, we managed to run zipkin.
 ![Pods](https://github.com/AlphaStream99/airplaneTrackingWithZipkin/blob/main/images/operation/minikube_pods.png)
