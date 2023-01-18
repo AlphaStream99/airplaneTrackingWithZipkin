@@ -77,6 +77,8 @@ Each bar that we see in Zipkin means the time it spent on the wire and the queue
 ### Summary of Research
 We have successfully integrated Zipkin tracing into our microservices. More details about the same have already been discussed in the above sections. Talking about the resuts/conclusions from the trace generated, we can say that Kafka seems to have performance issues for our use case and hence as a further improvement, we can switch to other message brokers like AWS SQS, OPCUA, etc. 
 
+![First Trace](https://github.com/AlphaStream99/airplaneTrackingWithZipkin/blob/main/images/trace.png)
+
 ### Summary of Lessons Learnt
 In this course, while implementing the project we learnt the following things:
 * How to create and devleop microservices
