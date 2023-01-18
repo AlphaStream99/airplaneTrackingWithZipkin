@@ -1,12 +1,12 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: airplane-service
+  name: flight-approval-service
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: airplane-service
+      app: flight-approval-service
   strategy:
     type: RollingUpdate
     rollingUpdate:
@@ -15,18 +15,18 @@ spec:
   template:
     metadata:
       labels:
-        app: airplane-service
+        app: flight-approval-service
     spec:
       containers:
-      - name: airplane-service
-        image: alphastream99/airplane-service:airplaneservice
+      - name: flight-approval-service
+        image: alphastream99/approval-service:approvalservice
         imagePullPolicy: Always
         ports:
-        - containerPort: 8099
+        - containerPort: 8090
         readinessProbe:
           httpGet:
             path: /
-            port: 8099
+            port: 8090
           initialDelaySeconds: 5
         lifecycle:
           preStop:

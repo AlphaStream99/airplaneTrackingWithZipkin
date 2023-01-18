@@ -1,12 +1,12 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: airplane-service
+  name: reporting-service
 spec:
   replicas: 2
   selector:
     matchLabels:
-      app: airplane-service
+      app: reporting-service
   strategy:
     type: RollingUpdate
     rollingUpdate:
@@ -15,18 +15,18 @@ spec:
   template:
     metadata:
       labels:
-        app: airplane-service
+        app: reporting-service
     spec:
       containers:
-      - name: airplane-service
-        image: alphastream99/airplane-service:airplaneservice
+      - name: reporting-service
+        image: alphastream99/reporting-service:reportingservice
         imagePullPolicy: Always
         ports:
-        - containerPort: 8099
+        - containerPort: 8090
         readinessProbe:
           httpGet:
             path: /
-            port: 8099
+            port: 8090
           initialDelaySeconds: 5
         lifecycle:
           preStop:
