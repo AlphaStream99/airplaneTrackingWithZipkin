@@ -153,6 +153,11 @@ In this course, while implementing the project we learnt the following things:
 ```bash
 curl to be added here
 ```
+### What we were able to get running
+We tried really hard to deploy things via Kubernetes. However, we were not able to get the pods running as we wished. However, we managed to run zipkin.
+![Pods](https://github.com/AlphaStream99/airplaneTrackingWithZipkin/blob/main/images/operation/minikube_pods.png)
+![Workloads](https://github.com/AlphaStream99/airplaneTrackingWithZipkin/blob/main/images/operation/minikube_workloads.png)
+![Workloads](https://github.com/AlphaStream99/airplaneTrackingWithZipkin/blob/main/images/operation/commands.png)
 
 ### References
 [1] Benno Pereszteghy's "Integration von Funktionstracing in OPC-UA"  *(For more details, please contat the author at benno99@gmx.at)*  
