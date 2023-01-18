@@ -17,11 +17,15 @@
 
 ---
 ### About the project
-This project is about integrating Zipkin trace generation in our system. The system is basically a microservice based architure with services namely - *Airplane Servcie, Flight Approval Service & Reporting Service* which together helps in ________________.
-We will add something here
+This project is about integrating Zipkin trace generation in our system. The system is basically a microservice based architure with services namely - *Airplane Servcie, Flight Approval Service & Reporting Service* which together helps in checking the status and location of the flight. We use Kafka as the message broker.
 
 #### Architecture of the System
-Insert the image which Benno edited here and explain a bit
+Our current architecture looks like the following:  
+We have Postman as the subsystem which creates data and feeds it into the Airplane Service (actually a microservice). The mentioned microservice processes the message, and forwards it into Kafka. When the Flight Approval Service is online, it will continuously read from the flight-request-topic, process the read data and send it toward the next kafka topic which is called flight-response-topic. From that topic, the third microservice called Reporting Service will read the messages, process them and discard them.
+
+We were actually interested in what kind of performance Kafka has as a message broker in our system. This is the reason why we were tracing the messages from the moment when the service puts them into the queue until the other one removes them again. Naturally, we tried to keep the latency inside the microservices as small as possible, so that it won't influence our measurements. The reason for that is, that we pack Zipkin related data into our messages like traceId, parentSpanId, startTimestamp (of the span) and  serviceName, and we do not want a message to stay in the queue for an unncecessarily long time, as it would invalidate the timestamps of the traces. 
+
+![Architecture Diagram](https://github.com/AlphaStream99/airplaneTrackingWithZipkin/blob/main/images/architecture_diagram.png)
 
 #### Deployment Plan
 We would be using Kubernetes to deploy the differnet microservices and helper-services like Kafka, Zookeeper, etc. In the diagram below, the box represents nodes and all the microservices will be in a 1 node 1 pod way including Zipkin. Whereas, Kafka, Zookeeper & Schema Registry would make a logical whole and would be kept together in 1 node.
