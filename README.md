@@ -12,6 +12,7 @@
 * [Summary of Research](#summary-of-research)
 * [Summary of Lessons Learnt](#summary-of-lessons-learnt)
 * [How to Run](#how-to-run)
+* [What we were able to get running](#what-we-were-able-to-get-running)
 * [References](#references)
 * [Submission 1 - Proposal](https://github.com/AlphaStream99/airplaneTrackingWithZipkin/blob/main/PROPOSAL.md)
 
