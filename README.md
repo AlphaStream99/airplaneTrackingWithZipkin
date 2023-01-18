@@ -146,13 +146,44 @@ In this course, while implementing the project we learnt the following things:
    * `exit`
 * Sample cURL: 
 ```bash
-curl to be added here
+curl --location --request POST 'http://localhost:8099/airplane-service/flight-request/testDe' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+   "flightCode":"DEL-123",
+   "fromCoordinates":{
+      "lat":30,
+      "lon":26
+   },
+   "toCoordinates":{
+      "lat":22,
+      "lon":-11
+   },
+   "uuid":"",
+   "traceId": "idd",
+   "parentId": -1,
+   "startTimestamp": 0,
+   "serviceName": "serviceName"
+}'
 ```
 ### What we were able to get running
 We tried really hard to deploy things via Kubernetes. However, we were not able to get the pods running as we wished. However, we managed to run zipkin.
 ![Pods](https://github.com/AlphaStream99/airplaneTrackingWithZipkin/blob/main/images/operation/minikube_pods.png)
 ![Workloads](https://github.com/AlphaStream99/airplaneTrackingWithZipkin/blob/main/images/operation/minikube_workloads.png)
 ![Workloads](https://github.com/AlphaStream99/airplaneTrackingWithZipkin/blob/main/images/operation/commands.png)
+
+In the end, we were not able to deploy the system on Kubernetes, and we were only able to do it locally. We would now show how things looked like during runtime:
+
+Start of the microservice called "Airplane Service":
+![Start](https://github.com/AlphaStream99/airplaneTrackingWithZipkin/blob/main/images/operation/starting.png)
+
+Sending of the first message accompanied with the first trace:
+![First Message](https://github.com/AlphaStream99/airplaneTrackingWithZipkin/blob/main/images/operation/sending_first_request.png)
+
+Searching for a trace, Zipkin presented us:
+![First Trace](https://github.com/AlphaStream99/airplaneTrackingWithZipkin/blob/main/images/operation/zipkin_1.png)
+
+If we expand that trace, we can find out what services it has traversed and how long it took. If we click on it, it will lead us to the full description of the page, which we have posted in a previous chapter. But expanding that entry will show us:
+![First Trace Expanded](https://github.com/AlphaStream99/airplaneTrackingWithZipkin/blob/main/images/operation/zipking_services_traversed.png)
 
 ### References
 [1] Benno Pereszteghy's "Integration von Funktionstracing in OPC-UA"  *(For more details, please contat the author at benno99@gmx.at)*  
